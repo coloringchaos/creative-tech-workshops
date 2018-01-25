@@ -94,6 +94,8 @@ Built into the Arduino IDE is a large collection example code. To access this, c
 
 You don't need to edit this code at all, we just need to select our board and port. Be sure that your Redboard is connected to your computer via USB, then go to **Tools > Board** and confirm that **Arduino Uno/Genuino** is selected. Next go to **Tools > Port** and select whichever port your Redboard is connected to (on Windows it will be COM... on MAC it will be usbmodem...).
 
+![board and port](images/board-port.png "Board and Port")
+
 ## Inputs and Outputs
 Inputs are our **sensors** - components that read a signal from the physical world and translate that into something that our microcontroller or computer can read. There are two kinds of inputs that we use with Arduino: *digital* and *analog*.
 
