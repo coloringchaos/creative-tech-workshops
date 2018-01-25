@@ -94,8 +94,6 @@ Built into the Arduino IDE is a large collection example code. To access this, c
 
 You don't need to edit this code at all, we just need to select our board and port. Be sure that your Redboard is connected to your computer via USB, then go to **Tools > Board** and confirm that **Arduino Uno/Genuino** is selected. Next go to **Tools > Port** and select whichever port your Redboard is connected to (on Windows it will be COM... on MAC it will be usbmodem...).
 
-##### ////TO DO - ADD A PHOTO OF THIS!!!!
-
 ## Inputs and Outputs
 Inputs are our **sensors** - components that read a signal from the physical world and translate that into something that our microcontroller or computer can read. There are two kinds of inputs that we use with Arduino: *digital* and *analog*.
 
@@ -106,22 +104,8 @@ A digital input has a discreet number of possible inputs. In the world of Arduin
 
 To read a digital input, we use the Arduino function [`digitalRead()`](https://www.arduino.cc/en/Reference/DigitalRead)
 
-<!-- Let's set up a simple circuit with a button and test this out.
-
-##### ////TO DO - ADD GRAPHIC OF BUTTON CIRCUIT
-
-Now, we need to program our microcontroller to read the digital input that we have connected.
-
-##### ////TO DO - ADD BUTTON CODE
-
-Upload the code to your board. You should get no errors when you upload the code, but you'll notice that when you press your button, nothing happens. This is because we have no output. Next we'll connect an LED to our button, or another way to see whether the button has been pressed is with the serial monitor. -->
-
 ### Digital Outputs
 Like inputs, digital outputs have a finite number of possible values. In the context of Arduino, the signal will be either on or off. A good example of this would be turning an LED on or off. To program a digital output, use the function [`digitalWrite()`](https://www.arduino.cc/en/Reference/DigitalWrite). You can pass the `digitalWrite()` function a value of 0 or 1, or also the word HIGH or LOW.
-
-<!-- Let's add an LED to our circuit, like this:
-
-##### ////TO DO - ADD PHOTO OF BUTTON CIRCUIT WITH -->
 
 ### Analog Inputs
 An analog input has an infinite number of possible input values within a particular range. Analog inputs represent changing voltages. When we're using Arduino, we're working with a 5V system, so an incoming analog sensor can offer any possible value between 0V and 5V. A slider is a good example of an analog input.
@@ -258,6 +242,7 @@ Now, let's set up our circuit to change the brightness of the LEDs based on the 
 
 Here is the circuit:
 
+![putting it together](images/everything.png "Puttin git together")
 
 Here is the code:
 
@@ -265,10 +250,21 @@ Here is the code:
 int sensorPin = A0;    // select the input pin for the potentiometer
 int sensorValue = 0;  // variable to store the value coming from the sensor
 
+const int buttonPin = 2;       // the number of the pushbutton pin
+const int redLedPin =  3;      // the pin number of red led
+const int yellowLedPin = 5;    // the pin number of yellow led
+
 int brightness; //variable for led brightness
 
 void setup() {
   Serial.begin(9600);
+
+  // initialize the LED pins as an output:
+  pinMode(redLedPin, OUTPUT);
+  pinMode(yellowLedPin, OUTPUT);
+
+  // initialize the pushbutton pin as an input:
+  pinMode(buttonPin, INPUT);
 }
 
 void loop() {
@@ -284,16 +280,31 @@ void loop() {
    *  but analog output is a value between 0-255
    *  either divide by 4 or use the map() function
    *  
-   *  also, you must use analogWrite on a PWM ~ pin
-   */
+   *  also, you must use analogWrite on a PWM ~ pin*/
 
    brightness = map(sensorValue, 0, 1023, 0, 255);
-   analogWrite(3, brightness);
+
+   //light the leds
+   if (buttonState == HIGH) {
+     digitalWrite(redLedPin, brightness);
+     digitalWrite(yellowLedPin, LOW);
+   } else {
+     //toggle
+     digitalWrite(redLedPin, brightness);
+     digitalWrite(yellowLedPin, HIGH);
+   }
+
 }
 
 </pre>
 
+<!-- ### Going Further
 
+One fun next-step is to switch out your LEDs for an RGB LED. These are great components because they let us mix color and create a much more dynamic output. RGB LEDs have 4 leads, the longest one is ground.
+
+Here is the wiring:
+
+![RGB LED](images/rgb.png "RGB LED")
 
 
 
@@ -301,4 +312,4 @@ void loop() {
 
 <br>
 
-<br>
+<br> -->
