@@ -6,7 +6,7 @@ copyright:
   name:             Arielle Hein
 
 # URL
-url:                "https://coloringchaos.github.io/creative-tech-workshops/"
+url:                "https://coloringchaos.github.io/creative-tech-workshops"
 baseurl:            "/creative-tech-workshops" # the subpath of your site, e.g. /blog
 
 
