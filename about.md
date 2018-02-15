@@ -3,7 +3,7 @@ title: About
 permalink: /about/
 ---
 
-This site includes a collection of creative technology workshops developed by Arielle Hein. It is mean to be a reference for workshop participants and a resource for those interested in extending their skills beyond our class time together.
+This site includes a collection of creative technology workshops developed by Arielle Hein. It is intended to be a reference for workshop participants and a resource for those interested in extending their skills beyond our class time together.
 
 ### About Arielle
 [Arielle Hein](https://ariellehein.com/) is an artist, technologist, and educator whose work explores the imaginative use of emerging technologies and spans the fields of human-computer interaction, interaction design and art. Drawing on an interdisciplinary background and a research-based creative practice, Arielle explores the intricate relationships between technology and our human experience.
