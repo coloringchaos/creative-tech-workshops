@@ -7,7 +7,7 @@ copyright:
 
 # URL
 url:                "https://coloringchaos.github.io/creative-tech-workshops"
-baseurl:            "/creative-tech-workshops" # the subpath of your site, e.g. /blog
+baseurl:            "/creative-tech-workshops/" # the subpath of your site, e.g. /blog
 
 
 permalink:          /:year-:month-:day/:title/
