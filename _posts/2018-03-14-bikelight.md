@@ -22,6 +22,155 @@ In this special workshop for Bike Week, participants will learn to program, asse
 
 ## Programming the ATtiny85
 
+The ATtiny85 is a simple, small integrated circuit that works with the Arduino programming environment. In order to program the chip, we will be using a really helpful USB board by Sparkfun called the [Tiny AVR Programmer](https://www.sparkfun.com/products/11801).
+
+Sparkfun's website has really [detailed instructions](https://learn.sparkfun.com/tutorials/tiny-avr-programmer-hookup-guide) about working with the ATtiny and the AVR Programmer board. In particular, their steps about installing the drivers and [programming the ATtiny](https://learn.sparkfun.com/tutorials/tiny-avr-programmer-hookup-guide#programming-in-arduino) in Arduino are very helpful.
+
+Once you have the library installed, be sure you have configured the Arduino settings correctly. Select your board, processor, clock and programmer to the settings in the image below. Unlike with many Arduino boards, you do not need to set your port. 
+
+*DO NOT set your clock to any external settings, this could permanently damage your chip*
+
+<br>
+
+![Arduino settings](images/settings.png "ATtiny settings")
+<br>
+
+
+Below is the code for programming the board. This program uses the Neopixel library to cycle through a variety of modes and color sequences.
+
+[Click here to download a .ino file with the code](images/attiny-neopixel.zip)
+
+
+```
+#include <Adafruit_NeoPixel.h>
+#ifdef __AVR__
+  #include <avr/power.h>
+#endif
+
+//neopixels are connected to digital 3, which is pin 2 on the ATtiny IC
+#define PIN 3
+#define NUM_LEDS 4 //number of leds
+
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS, PIN, NEO_GRB + NEO_KHZ800);
+
+void setup() {
+  //this code block is really important!!
+  //we need to be sure the clock is set to 8MHz
+  #if defined (__AVR_ATtiny85__)
+    if (F_CPU == 8000000) clock_prescale_set(clock_div_1);
+  #endif
+
+  strip.begin();
+  strip.show();  // Initialize all pixels to 'off'
+}
+
+void loop() {
+  // Some example procedures showing how to display to the pixels:
+  colorWipe(strip.Color(255, 0, 0), 50); // Red
+  colorWipe(strip.Color(0, 255, 0), 50); // Green
+  colorWipe(strip.Color(0, 0, 255), 50); // Blue
+
+  theaterChase(strip.Color(127, 127, 127), 50); // White
+  theaterChase(strip.Color(127, 0, 0), 50); // Red
+  theaterChase(strip.Color(0, 0, 127), 50); // Blue
+
+  rainbow(20);
+  rainbowCycle(20);
+  theaterChaseRainbow(50);
+}
+
+// Fill the dots one after the other with a color
+void colorWipe(uint32_t c, uint8_t wait) {
+  for(uint16_t i=0; i<strip.numPixels(); i++) {
+    strip.setPixelColor(i, c);
+    strip.show();
+    delay(wait);
+  }
+}
+
+void rainbow(uint8_t wait) {
+  uint16_t i, j;
+
+  for(j=0; j<256; j++) {
+    for(i=0; i<strip.numPixels(); i++) {
+      strip.setPixelColor(i, Wheel((i+j) & 255));
+    }
+    strip.show();
+    delay(wait);
+  }
+}
+
+// Slightly different, this makes the rainbow equally distributed throughout
+void rainbowCycle(uint8_t wait) {
+  uint16_t i, j;
+
+  for(j=0; j<256*5; j++) { // 5 cycles of all colors on wheel
+    for(i=0; i< strip.numPixels(); i++) {
+      strip.setPixelColor(i, Wheel(((i * 256 / strip.numPixels()) + j) & 255));
+    }
+    strip.show();
+    delay(wait);
+  }
+}
+
+//Theatre-style crawling lights.
+void theaterChase(uint32_t c, uint8_t wait) {
+  for (int j=0; j<10; j++) {  //do 10 cycles of chasing
+    for (int q=0; q < 3; q++) {
+      for (uint16_t i=0; i < strip.numPixels(); i=i+3) {
+        strip.setPixelColor(i+q, c);    //turn every third pixel on
+      }
+      strip.show();
+
+      delay(wait);
+
+      for (uint16_t i=0; i < strip.numPixels(); i=i+3) {
+        strip.setPixelColor(i+q, 0);        //turn every third pixel off
+      }
+    }
+  }
+}
+
+//Theatre-style crawling lights with rainbow effect
+void theaterChaseRainbow(uint8_t wait) {
+  for (int j=0; j < 256; j++) {     // cycle all 256 colors in the wheel
+    for (int q=0; q < 3; q++) {
+      for (uint16_t i=0; i < strip.numPixels(); i=i+3) {
+        strip.setPixelColor(i+q, Wheel( (i+j) % 255));    //turn every third pixel on
+      }
+      strip.show();
+
+      delay(wait);
+
+      for (uint16_t i=0; i < strip.numPixels(); i=i+3) {
+        strip.setPixelColor(i+q, 0);        //turn every third pixel off
+      }
+    }
+  }
+}
+
+// Input a value 0 to 255 to get a color value.
+// The colours are a transition r - g - b - back to r.
+uint32_t Wheel(byte WheelPos) {
+  WheelPos = 255 - WheelPos;
+  if(WheelPos < 85) {
+    return strip.Color(255 - WheelPos * 3, 0, WheelPos * 3);
+  }
+  if(WheelPos < 170) {
+    WheelPos -= 85;
+    return strip.Color(0, WheelPos * 3, 255 - WheelPos * 3);
+  }
+  WheelPos -= 170;
+  return strip.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
+}
+
+```
+
+
+
+
+The ATtiny has 8 pins, they are designated as follows:
+
 ![ATtiny pinout](images/attiny.png "ATtiny pinout")
 
 
