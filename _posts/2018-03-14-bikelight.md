@@ -110,4 +110,4 @@ Finally, solder the neopixel wires to your board.
 
 Put it all together and admire your creation!
 
-![step 6-1](images/step6-1.jpg "final")
+![step 6-1](images/final.jpg "final")
