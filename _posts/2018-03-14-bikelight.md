@@ -7,8 +7,8 @@ date: 2018-03-14
 permalink: /bike-light
 ---
 
-**Workshop by Arielle Hein** <br>
-Thursday, March 15th 2018
+<!-- **Workshop by Arielle Hein** <br>
+Thursday, March 15th 2018 -->
 
 **BLDG61 Electronics Workshop**<br>
 Boulder, Colorado
@@ -21,7 +21,6 @@ In this special workshop for Bike Week, participants will learn to program, asse
 <br>
 
 ## Programming the ATtiny85
-
 
 
 <br>
@@ -100,6 +99,15 @@ Next, connect the switch between the positive side of the battery and pin 8 (5V)
 
 ![step 5-5](images/step5-5.png "neopixel")
 
-Finally, solder the neopixel wires to your board. 
+<br>
+Finally, solder the neopixel wires to your board.
 
 ![step 5-6](images/step5-6.png "neopixel")
+
+
+<br>
+#### **Step 6: Add Battery & Programmed ATtiny**
+
+Put it all together and admire your creation!
+
+![step 6-1](images/step6-1.jpg "final")
