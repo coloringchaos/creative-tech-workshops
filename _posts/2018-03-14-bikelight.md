@@ -83,7 +83,7 @@ Add the battery holder. Be sure to position it so that the positive side of the 
 
 For both the switch and the neopixels, you will be attaching wires that will allow the components to be detached from the board.
 
-A great trick for doing this easily is to first add solder to the place you intend to create a connection, then remove the solder add the wire to the hot soldered area.
+A great trick for this is to first add solder to the place you intend to create a connection. Then, remove the solder and pick up your wire and slide the wire into the hot solder.
 
 ![step 5-1](images/step5-1.jpg "switch")
 
