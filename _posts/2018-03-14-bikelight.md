@@ -22,6 +22,8 @@ In this special workshop for Bike Week, participants will learn to program, asse
 
 ## Programming the ATtiny85
 
+![ATtiny pinout](images/attiny.png "ATtiny pinout")
+
 
 <br>
 
